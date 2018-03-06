@@ -1,7 +1,11 @@
 # r-template
 
+This is a gulp template for building a project
+
 ## How to use
 
-### Just type yarn install
 
-### Gulp
+
+1. yarn install
+
+2. Gulp
