@@ -24,7 +24,7 @@ gulp.task('sprites', function () {
 
 
 // compiling sass in css
-gulp.task("sass", function(){
+gulp.task("sass", ["sprites"], function(){
 	return gulp.src('source/sass/main.sass')
 		.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
 		.pipe(sass().on("error",sass.logError))
