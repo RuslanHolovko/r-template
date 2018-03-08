@@ -8,7 +8,20 @@ var gulp         = require('gulp'),
 	imagemin     = require("gulp-imagemin"),
 	rename       = require("gulp-rename"),
 	notify       = require("gulp-notify"),
-	plumber      = require("gulp-plumber")
+	plumber      = require("gulp-plumber"),
+	svgSprite    = require("gulp-svg-sprites")
+
+
+// svg sprites
+gulp.task('sprites', function () {
+    return gulp.src('source/svg-icons/*.svg')
+        .pipe(svgSprite({
+        	mode: "symbols",
+        	baseSize: 40
+        }))
+        .pipe(gulp.dest("source/img/icons/"));
+});
+
 
 // compiling sass in css
 gulp.task("sass", function(){
