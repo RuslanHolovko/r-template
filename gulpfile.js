@@ -9,22 +9,26 @@ var gulp         = require('gulp'),
 	rename       = require("gulp-rename"),
 	notify       = require("gulp-notify"),
 	plumber      = require("gulp-plumber"),
-	svgSprite    = require("gulp-svg-sprites")
+	svgSprite    = require("gulp-svg-sprites"),
+	gulpif       = require("gulp-if")
 
 
 // svg sprites
 gulp.task('sprites', function () {
     return gulp.src('source/svg-icons/*.svg')
         .pipe(svgSprite({
-        	mode: "symbols",
-        	baseSize: 40
+        	svg: {
+        		sprite: "sprite.svg"
+        	},
+        	cssFile: "_sprite.scss"
+
         }))
-        .pipe(gulp.dest("source/img/icons/"));
+        .pipe(gulpif("sprite.svg", gulp.dest("source/img/"), gulp.dest("source/sass")));
 });
 
 
 // compiling sass in css
-gulp.task("sass", ["sprites"], function(){
+gulp.task("sass", function(){
 	return gulp.src('source/sass/main.sass')
 		.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
 		.pipe(sass().on("error",sass.logError))
