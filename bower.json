@@ -1,0 +1,8 @@
+{
+  "name": "r-template",
+  "description": "ok",
+  "version": "1",
+  "devDependencies": {
+    "jquery": "^3.3.1"
+  }
+}

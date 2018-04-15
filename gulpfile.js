@@ -10,7 +10,25 @@ var gulp         = require('gulp'),
 	notify       = require("gulp-notify"),
 	plumber      = require("gulp-plumber"),
 	svgSprite    = require("gulp-svg-sprites"),
-	gulpif       = require("gulp-if")
+	gulpif       = require("gulp-if"),
+	twig 		 = require('gulp-twig');
+
+
+// twig task
+gulp.task('compile', function () {
+    return gulp.src('source/template/*.twig')
+        .pipe(twig({
+            data: {
+                title: 'Gulp and Twig',
+                benefits: [
+                    'Fast',
+                    'Flexible',
+                    'Secure'
+                ]
+            }
+        }))
+        .pipe(gulp.dest('source/'));
+});
 
 
 // svg sprites
@@ -42,8 +60,7 @@ gulp.task("sass", function(){
 // concat and uglify all js libraries
 gulp.task("scripts", function(){
 	return gulp.src([
-		"node_modules/jquery/dist/jquery.min.js",
-		"node_modules/smoothscroll-for-websites/SmoothScroll.js"
+		"source/libs/jquery/dist/jquery.min.js"
 		])
 
 	.pipe(concat("libs.min.js"))
@@ -64,13 +81,14 @@ gulp.task("img", function(){
 });
 
 // server
-gulp.task('serve', ["sass", "scripts"], function() {
+gulp.task('serve', ["sass", "scripts", "compile"], function() {
 
 	browserSync.init({
 		server: "source"
 	});
 
 	gulp.watch("source/sass/main.sass", ['sass']);
+	gulp.watch("source/template/**/*.twig", ['compile']);
 	gulp.watch("source/*.html").on('change', browserSync.reload);
 	gulp.watch("source/js/*.js").on('change', browserSync.reload);
 });

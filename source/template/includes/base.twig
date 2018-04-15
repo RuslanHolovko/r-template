@@ -1,0 +1,22 @@
+{# base.twig #}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="A demo of how to use gulp-twig"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="css/main.min.css">
+
+</head>
+<body>
+	
+	{% block content %}
+	{% endblock %}
+
+	<script src="js/libs.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+</html>

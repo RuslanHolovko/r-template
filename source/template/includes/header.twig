@@ -1,0 +1,11 @@
+{# header.twig #}
+
+{% set links = ["home", "about", "contact us"] %}
+
+<header>
+	<nav>
+		{% for value in links %}
+			<a href="#">{{ value }}</a>
+		{% endfor %}
+	</nav>
+</header>
