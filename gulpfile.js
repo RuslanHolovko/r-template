@@ -12,6 +12,8 @@ var gulp         = require('gulp'),
 	svgSprite    = require("gulp-svg-sprites"),
 	gulpif       = require("gulp-if"),
 	twig 		 = require('gulp-twig');
+	cmq          = require('gulp-group-css-media-queries');
+
 
 
 // twig task
@@ -51,6 +53,7 @@ gulp.task("sass", function(){
 		.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
 		.pipe(sass().on("error",sass.logError))
 		.pipe(autoprefixer(["last 15 version", "> 1%", "ie 8", "ie 7"]))
+		.pipe(cmq())
 		// .pipe(cleancss())
 		.pipe(rename({suffix: ".min"}))
 		.pipe(gulp.dest("source/css"))
