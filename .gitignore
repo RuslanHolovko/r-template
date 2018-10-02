@@ -1,3 +1,3 @@
-source/libs
-node_modules
-.git
+/source/libs/
+/node_modules/
+/.git/
